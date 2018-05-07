@@ -1,0 +1,59 @@
+" --- Must be first ---
+set nocompatible
+
+set encoding=utf-8
+
+filetype off
+
+" --- Vundle Plugins ---
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+" --- Making Vim look good ---
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'flazz/vim-colorschemes'
+
+" --- Vim as text editor ---
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+
+call vundle#end()
+
+filetype plugin indent on
+
+" --- General settings ---
+set backspace=indent,eol,start
+set ruler
+set number
+set showcmd
+set incsearch
+set hlsearch
+
+syntax on
+
+set mouse=a
+
+" --- Plugin-Specific Settings ---
+"
+
+" --- bling/vim-airline settings ---
+" Always show statusbar
+set laststatus=2
+
+" Fancy arrow symbols, requires a patched font
+" To install a patched font, run over to
+"     https://github.com/abertsch/Menlo-for-Powerline
+" download all the .ttf files, double-click on them and click "Install"
+" Finally, uncomment the next line
+let g:airline_powerline_fonts=1
+let g:airline_detect_paste=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='murmur'
+
+" --- jistr/vim-nerdtree-tabs settings ---
+" Open / close NERDTree tabs with \t
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+
