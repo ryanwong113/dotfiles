@@ -1,7 +1,8 @@
 " --- Must be first ---
 set nocompatible
-
 set encoding=utf-8
+set number relativenumber
+set nohlsearch
 
 filetype off
 
@@ -19,6 +20,10 @@ Plugin 'flazz/vim-colorschemes'
 " --- Vim as text editor ---
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" --- Python ---
+Plugin 'davidhalter/jedi-vim'
 
 call vundle#end()
 
@@ -50,10 +55,47 @@ set laststatus=2
 " Finally, uncomment the next line
 let g:airline_powerline_fonts=1
 let g:airline_detect_paste=1
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='murmur'
 
-" --- jistr/vim-nerdtree-tabs settings ---
-" Open / close NERDTree tabs with \t
-nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+
+" --- color scheme ---
+colorscheme molokai 
+set background=dark
+" --- set line number background to black
+highlight LineNr ctermbg=233
+" --- set line number to color
+highlight LineNr ctermfg=004
+
+" --- NERDTree Settings ---
+" Open / close NERDTree tabs with Crtl-n
+map <C-n> :NERDTreeTabsToggle<CR>
+
+" NERDTree file highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+" --- ctrlp Settings ---
+let g:ctrlp_map='<c-p>'
+let g:ctrlp_cmd='CtrlP'
+let g:ctrlp_working_path_mode='ra'
+
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe
+
 
